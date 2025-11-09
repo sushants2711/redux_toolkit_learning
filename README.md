@@ -8,9 +8,13 @@ It demonstrates how to use **Redux Toolkit** for state management in a clean and
 
 ## 🚀 Live Demo
 
-🔗 **Live URL:** [https://your-live-demo-link-here.com](https://your-live-demo-link-here.com)
+🔗 **Live URL:** [https://redux-toolkit-learning-frontend.onrender.com](https://redux-toolkit-learning-frontend.onrender.com)
 
-_(Replace with your deployed app URL — for example, from Netlify or Vercel)_
+---
+
+## 🚀 Github Repo
+
+🔗 **GitHub URL:** [https://github.com/sushants2711/redux_toolkit_learning](https://github.com/sushants2711/redux_toolkit_learning)
 
 ---
 
@@ -25,6 +29,7 @@ _(Replace with your deployed app URL — for example, from Netlify or Vercel)_
 
 ## 📂 Folder Structure
 
+```
 src/
 │
 ├── app/
@@ -36,6 +41,8 @@ src/
 │
 ├── App.js
 └── index.js
+
+```
 
 ---
 
