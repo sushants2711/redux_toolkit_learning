@@ -1,42 +1,49 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { toggleTask } from "./taskSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTask, fetchTask } from "./taskSlice";
 
 export const Task = () => {
     const dispatch = useDispatch();
-
-    const tasks = useSelector((state) => state.tasks.task);
+    const { task, loading, error } = useSelector((state) => state.tasks);
 
     const handleToggle = (id) => {
+        // console.log(id)
         dispatch(toggleTask(id));
     };
 
+    useEffect(() => {
+        dispatch(fetchTask());
+    }, []);
+
     return (
         <div className="container my-5">
+            {loading && <p>Loading ...</p>}
+            {error && <p>{error}</p>}
             <h1 className="mb-4">My Task List</h1>
-            {tasks.map((curr, index) => (
+
+            {task.map((curr, index) => (
                 <div key={index} className="card mb-4 shadow-sm">
                     <div className="card-header bg-primary text-white">
                         Date: {curr.date}
                     </div>
 
                     <ul className="list-group list-group-flush">
-                        {curr.task.map((curr) => (
+                        {curr.tasks.map((t) => (
                             <li
-                                key={curr.id}
-                                className={`list-group-item d-flex justify-content-between align-items-center ${curr.status === "Completed" ? "list-group-item-success" : ""
+                                key={t.taskId}
+                                className={`list-group-item d-flex justify-content-between align-items-center ${t.taskStatus === "Completed" ? "list-group-item-success" : ""
                                     }`}
                             >
-                                <span>{curr.name}</span>
-                                <span
-                                    className={`badge rounded-pill ${curr.status === "Completed"
-                                        ? "bg-success"
-                                        : "bg-warning text-dark"
+                                <span>{t.task}</span>
+                                <button
+                                    className={`btn btn-sm ${t.taskStatus === "Completed"
+                                        ? "btn-success"
+                                        : "btn-warning text-dark"
                                         }`}
+                                    onClick={() => handleToggle(t.taskId)}
                                 >
-                                    <button className="btn btn-sm" onClick={() => handleToggle(curr.id)}>{curr.status}</button>
-                                </span>
+                                    {t.taskStatus}
+                                </button>
                             </li>
                         ))}
                     </ul>
